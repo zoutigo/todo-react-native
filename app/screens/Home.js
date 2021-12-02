@@ -1,5 +1,6 @@
 import React from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
+import Button from "@components/UI/Button";
 
 const Home = ({ navigation }) => {
   const handlePress = () => {
@@ -7,8 +8,7 @@ const Home = ({ navigation }) => {
   };
   return (
     <View style={styles.container}>
-      <Text>Home Page</Text>
-      <Button title="Go to creta Page" onPress={handlePress} />
+      <Button onPress={handlePress}>+ Add a to-do</Button>
     </View>
   );
 };
@@ -16,6 +16,7 @@ const Home = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding: 16,
     backgroundColor: "green",
     alignItems: "center",
     justifyContent: "center",
