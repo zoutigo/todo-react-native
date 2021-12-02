@@ -1,16 +1,11 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
+import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
-import Hello from "@components/Hello";
+
+import Navigation from "@navigation/Navigation";
 
 export default function App() {
-  Hello();
-  return (
-    <View style={styles.container}>
-      <Text>Hello boy fine</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+  return <Navigation />;
 }
 
 const styles = StyleSheet.create({
