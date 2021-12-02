@@ -1,9 +1,15 @@
 import React from "react";
 import { View, Text, TextInput, StyleSheet } from "react-native";
+import { useValue } from "react-native-reanimated";
 
-const Input = ({ placeholder }) => {
+const Input = ({ placeholder, value, onChange }) => {
   return (
-    <TextInput style={styles.container} placeholder={placeholder}></TextInput>
+    <TextInput
+      style={styles.container}
+      placeholder={placeholder}
+      value={useValue}
+      onChangeText={(e) => onChange(e)}
+    ></TextInput>
   );
 };
 

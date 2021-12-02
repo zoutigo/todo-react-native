@@ -2,16 +2,28 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import Input from "@components/UI/Input";
 import Button from "@components/UI/Button";
+import useNewTodoManage from "@hooks/useNewTodoManage";
 
 const TodoCreate = ({ navigation }) => {
+  const { fieldsTab, handleSubmit } = useNewTodoManage();
+
   const handlePress = () => {
     navigation.navigate("Home");
   };
   return (
     <View style={styles.container}>
-      <Input placeholder="Name of the task to do" />
-      <Input placeholder="Description (optional)" />
-      <Button onPress={handlePress}> Add a to-do</Button>
+      {fieldsTab.map(({ value, onChange, placeholder }) => {
+        return (
+          <Input
+            key={placeholder}
+            placeholder={placeholder}
+            value={value}
+            onChange={onChange}
+          />
+        );
+      })}
+
+      <Button onPress={handleSubmit}> Add a to-do</Button>
     </View>
   );
 };
