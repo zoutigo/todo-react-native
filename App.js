@@ -1,18 +1,22 @@
-import React from "react";
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
-
-import Navigation from "@navigation/Navigation";
+import React from "react"
+import Navigation from "@navigation/Navigation"
+import { AppStateProvider } from "./app/state/AppContext"
+import { View, Text } from "react-native"
 
 export default function App() {
-  return <Navigation />;
-}
+  return (
+    <AppStateProvider>
+      <View>
+        <Text>Hello</Text>
+      </View>
+    </AppStateProvider>
+  )
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+  // return <Navigation />;
+
+  // return (
+  //   <View>
+  //     <Text>Hello</Text>
+  //   </View>
+  // );
+}
