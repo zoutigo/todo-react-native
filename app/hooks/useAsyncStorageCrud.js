@@ -20,7 +20,20 @@ const useAsyncStorageCrud = () => {
     await AsyncStorage.setItem("@todoList", jsonValue);
   };
 
-  return { todoList, todoCreate };
+  const todoDelete = async (index) => {
+    const newTodoList = [...todoList];
+    newTodoList.splice(index, 1);
+    const jsonValue = JSON.stringify(newTodoList);
+    await AsyncStorage.setItem("@todoList", jsonValue);
+  };
+  const todoUpdate = async (index, toDo) => {
+    const newTodoList = [...todoList];
+    newTodoList.splice(index, 1, toDo);
+    const jsonValue = JSON.stringify(newTodoList);
+    await AsyncStorage.setItem("@todoList", jsonValue);
+  };
+
+  return { todoList, todoCreate, todoUpdate, todoDelete };
 };
 
 export default useAsyncStorageCrud;
