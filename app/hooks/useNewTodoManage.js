@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import useAsyncStorageCrud from "@hooks/useAsyncStorageCrud";
 
 const useNewTodoManage = () => {
   const [title, titleChange] = useState(null);
   const [description, descriptionChange] = useState(null);
+
+  const { todoCreate } = useAsyncStorageCrud();
 
   const fieldsTab = [
     {
@@ -18,8 +20,12 @@ const useNewTodoManage = () => {
     },
   ];
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!title || title.length === 0) return alert("title mandatory");
+
+    await todoCreate({ title, description });
+    titleChange("");
+    descriptionChange("");
   };
 
   return { fieldsTab, handleSubmit };

@@ -10,6 +10,7 @@ const TodoCreate = ({ navigation }) => {
   const handlePress = () => {
     navigation.navigate("Home");
   };
+
   return (
     <View style={styles.container}>
       {fieldsTab.map(({ value, onChange, placeholder }) => {
