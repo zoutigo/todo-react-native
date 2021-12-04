@@ -1,39 +1,50 @@
-import React, { useState, useEffect } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import React, { useState, useEffect } from "react"
+import AsyncStorage from "@react-native-async-storage/async-storage"
+import useAppContext from "./useAppContext"
 
 const useAsyncStorageCrud = () => {
-  const [todoList, todoListChange] = useState([]);
+  const {
+    state: { toDoList },
+    dispatch,
+  } = useAppContext()
+
+  const toDoListChange = (newList) => {
+    dispatch({ type: "TO_DO_LIST_CHANGE", toDoList: newList })
+  }
 
   useEffect(async () => {
-    await AsyncStorage.getItem("todoList").then((savedTodoList) => {
+    await AsyncStorage.getItem("toDoList").then((savedTodoList) => {
       if (savedTodoList) {
-        let parsedList = JSON.parse(savedTodoList);
-        todoListChange(parsedList);
+        let parsedList = JSON.parse(savedTodoList)
+        toDoListChange(parsedList)
       }
-    });
-  }, []);
+    })
+  }, [])
 
   const todoCreate = async (toDo) => {
-    const newTodoList = [...todoList];
-    newTodoList.push(toDo);
-    const jsonValue = JSON.stringify(newTodoList);
-    await AsyncStorage.setItem("todoList", jsonValue);
-  };
+    const newTodoList = [...toDoList]
+    newTodoList.push(toDo)
+    const jsonValue = JSON.stringify(newTodoList)
+    await AsyncStorage.setItem("toDoList", jsonValue)
+    toDoListChange(newTodoList)
+  }
 
   const todoDelete = async (index) => {
-    const newTodoList = [...todoList];
-    newTodoList.splice(index, 1);
-    const jsonValue = JSON.stringify(newTodoList);
-    await AsyncStorage.setItem("todoList", jsonValue);
-  };
+    const newTodoList = [...toDoList]
+    newTodoList.splice(index, 1)
+    const jsonValue = JSON.stringify(newTodoList)
+    await AsyncStorage.setItem("toDoList", jsonValue)
+    toDoListChange(newTodoList)
+  }
   const todoUpdate = async (index, toDo) => {
-    const newTodoList = [...todoList];
-    newTodoList.splice(index, 1, toDo);
-    const jsonValue = JSON.stringify(newTodoList);
-    await AsyncStorage.setItem("todoList", jsonValue);
-  };
+    const newTodoList = [...toDoList]
+    newTodoList.splice(index, 1, toDo)
+    const jsonValue = JSON.stringify(newTodoList)
+    await AsyncStorage.setItem("toDoList", jsonValue)
+    toDoListChange(newTodoList)
+  }
 
-  return { todoList, todoCreate, todoUpdate, todoDelete };
-};
+  return { toDoList, todoCreate, todoUpdate, todoDelete }
+}
 
-export default useAsyncStorageCrud;
+export default useAsyncStorageCrud

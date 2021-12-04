@@ -1,19 +1,19 @@
-import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-import useAsyncStorageCrud from "@hooks/useAsyncStorageCrud";
+import React from "react"
+import { View, Text, StyleSheet } from "react-native"
+import useAsyncStorageCrud from "@hooks/useAsyncStorageCrud"
 
-import Button from "@components/UI/Button";
+import Button from "@components/UI/Button"
 
 const Home = ({ navigation }) => {
   const handlePress = () => {
-    navigation.navigate("TodoCreate");
-  };
+    navigation.navigate("TodoCreate")
+  }
 
-  const { todoList } = useAsyncStorageCrud();
-  console.log("todoList:", todoList);
+  const { toDoList } = useAsyncStorageCrud()
+
   return (
     <View style={styles.container}>
-      {todoList.map(({ title, description }, index) => (
+      {toDoList.map(({ title, description }, index) => (
         <View key={index}>
           <Text>{title} </Text>
           <Text>{description ? description : "No description"} </Text>
@@ -21,8 +21,8 @@ const Home = ({ navigation }) => {
       ))}
       <Button onPress={handlePress}>+ Add a to-do</Button>
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -32,6 +32,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-});
+})
 
-export default Home;
+export default Home
