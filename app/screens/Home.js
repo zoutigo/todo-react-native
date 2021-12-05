@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from "react-native"
 import useAsyncStorageCrud from "@hooks/useAsyncStorageCrud"
 
 import Button from "@components/UI/Button"
+import ToDoCard from "../components/ToDoCard"
 
 const Home = ({ navigation }) => {
   const handlePress = () => {
@@ -13,11 +14,12 @@ const Home = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      {toDoList.map(({ title, description }, index) => (
-        <View key={index}>
-          <Text>{title} </Text>
-          <Text>{description ? description : "No description"} </Text>
-        </View>
+      {toDoList.map((toDo, index) => (
+        <ToDoCard key={index} {...toDo} />
+        // <View key={index} >
+        //   <Text>{title} </Text>
+        //   <Text>{description ? description : "No description"} </Text>
+        // </View>
       ))}
       <Button onPress={handlePress}>+ Add a to-do</Button>
     </View>
