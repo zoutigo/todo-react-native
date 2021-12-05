@@ -10,17 +10,17 @@ const Home = ({ navigation }) => {
     navigation.navigate("TodoCreate")
   }
 
-  const { toDoList } = useAsyncStorageCrud()
+  const { toDoList, toDoDelete } = useAsyncStorageCrud()
 
   return (
     <View style={styles.container}>
-      {toDoList.map((toDo, index) => (
-        <ToDoCard key={index} {...toDo} />
-        // <View key={index} >
-        //   <Text>{title} </Text>
-        //   <Text>{description ? description : "No description"} </Text>
-        // </View>
-      ))}
+      {toDoList.map((toDo, index) => {
+        const handleDelete = () => {
+          toDoDelete(index)
+        }
+
+        return <ToDoCard key={index} {...toDo} handleDelete={handleDelete} />
+      })}
       <Button onPress={handlePress}>+ Add a to-do</Button>
     </View>
   )
