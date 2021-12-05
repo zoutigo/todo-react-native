@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import useAsyncStorageCrud from "@hooks/useAsyncStorageCrud";
+import React, { useState } from "react"
+import useAsyncStorageCrud from "@hooks/useAsyncStorageCrud"
 
 const useNewTodoManage = () => {
-  const [title, titleChange] = useState(null);
-  const [description, descriptionChange] = useState(null);
+  const [title, titleChange] = useState(null)
+  const [description, descriptionChange] = useState(null)
 
-  const { todoCreate } = useAsyncStorageCrud();
+  const { todoCreate } = useAsyncStorageCrud()
 
   const fieldsTab = [
     {
@@ -18,17 +18,17 @@ const useNewTodoManage = () => {
       onChange: (e) => descriptionChange(e),
       placeholder: "Description (optional)",
     },
-  ];
+  ]
 
   const handleSubmit = async () => {
-    if (!title || title.length === 0) return alert("title mandatory");
+    if (!title || title.length === 0) return alert("title mandatory")
 
-    await todoCreate({ title, description });
-    titleChange("");
-    descriptionChange("");
-  };
+    await todoCreate({ title, description, checked: false })
+    titleChange("")
+    descriptionChange("")
+  }
 
-  return { fieldsTab, handleSubmit };
-};
+  return { fieldsTab, handleSubmit }
+}
 
-export default useNewTodoManage;
+export default useNewTodoManage

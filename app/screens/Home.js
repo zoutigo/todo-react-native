@@ -1,28 +1,41 @@
 import React from "react"
-import { View, Text, StyleSheet } from "react-native"
+import { View, Text, StyleSheet, ScrollView } from "react-native"
 import useAsyncStorageCrud from "@hooks/useAsyncStorageCrud"
 
 import Button from "@components/UI/Button"
 import ToDoCard from "../components/ToDoCard"
+import Title from "../components/UI/Title"
 
 const Home = ({ navigation }) => {
   const handlePress = () => {
     navigation.navigate("TodoCreate")
   }
 
-  const { toDoList, toDoDelete } = useAsyncStorageCrud()
+  const { toDoList, toDoDelete, toDoUpdate } = useAsyncStorageCrud()
 
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
+      <Title>My Todo App </Title>
       {toDoList.map((toDo, index) => {
         const handleDelete = () => {
           toDoDelete(index)
         }
+        const handleUpdate = () => {
+          const updatedToDo = { ...toDo, checked: !toDo.checked }
+          toDoUpdate(index, updatedToDo)
+        }
 
-        return <ToDoCard key={index} {...toDo} handleDelete={handleDelete} />
+        return (
+          <ToDoCard
+            key={index}
+            {...toDo}
+            handleDelete={handleDelete}
+            handleUpdate={handleUpdate}
+          />
+        )
       })}
       <Button onPress={handlePress}>+ Add a to-do</Button>
-    </View>
+    </ScrollView>
   )
 }
 

@@ -1,13 +1,13 @@
-import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import React from "react"
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native"
 
 const Button = ({ children, onPress }) => {
   return (
     <TouchableOpacity style={styles.container} onPress={onPress}>
       <Text style={styles.title}>{children} </Text>
     </TouchableOpacity>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
     borderRadius: 14,
     width: "100%",
     alignItems: "center",
+    marginTop: 32,
   },
   title: {
     color: "white",
@@ -22,6 +23,6 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontWeight: "600",
   },
-});
+})
 
-export default Button;
+export default Button

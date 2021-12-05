@@ -36,7 +36,7 @@ const useAsyncStorageCrud = () => {
     await AsyncStorage.setItem("toDoList", jsonValue)
     toDoListChange(newTodoList)
   }
-  const todoUpdate = async (index, toDo) => {
+  const toDoUpdate = async (index, toDo) => {
     const newTodoList = [...toDoList]
     newTodoList.splice(index, 1, toDo)
     const jsonValue = JSON.stringify(newTodoList)
@@ -44,7 +44,7 @@ const useAsyncStorageCrud = () => {
     toDoListChange(newTodoList)
   }
 
-  return { toDoList, todoCreate, todoUpdate, toDoDelete }
+  return { toDoList, todoCreate, toDoUpdate, toDoDelete }
 }
 
 export default useAsyncStorageCrud
